@@ -74,7 +74,7 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
   patiently do
     fragment = URI.parse(current_url).fragment
     fragment.sub!(/[#?].*/, '') if fragment # most js frameworks will usually use ? and # for params, we dont care about those
-    current_path = URI.parse(current_url).path
+    current_path = URI.parse(current_url).to_s # to_s instead of .path so the path_to is usable for I should be on <page> steps
     current_path << "##{fragment}" if fragment.present?
     expected_path = _path_to(page_name)
 
